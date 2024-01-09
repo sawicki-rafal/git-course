@@ -1,13 +1,13 @@
-package pl.edukacyjni.gitcourse;
+package pl.edukacyjni;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class GitCourseApplication {
+public class EdukacyjniApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(GitCourseApplication.class, args);
+        SpringApplication.run(EdukacyjniApplication.class, args);
     }
 
 }

@@ -1,10 +1,10 @@
-package pl.edukacyjni.gitcourse;
+package pl.edukacyjni;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class GitCourseApplicationTests {
+class EdukacyjniApplicationTests {
 
     @Test
     void contextLoads() {
