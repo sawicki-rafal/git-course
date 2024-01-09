@@ -29,8 +29,7 @@ some require you to perform some action (e.g write some code & commit). Learn st
 
 ### Lessons
 
-0. [Learn how to write a git commit message](how-to-write-a-git-commit-message.md)
-1. Setup [SSH for GitHub account](ssh-for-github.md)
-2. Checkout this **repo**
-
+0. [Learn how to write a git commit message](lessons/how-to-write-a-git-commit-message.md)
+1. Setup [SSH for GitHub account](lessons/ssh-for-github.md)
+2. Checkout this **repo** and make yourself familiar with [the example application](README.md). Please run & try it!
 
