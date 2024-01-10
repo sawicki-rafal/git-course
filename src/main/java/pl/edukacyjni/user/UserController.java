@@ -26,7 +26,7 @@ public class UserController {
         if(result != null)
             return  result;
         else
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Resource not found for this id: "+id);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Resource not found for this id: "+id);
 
     }
 
