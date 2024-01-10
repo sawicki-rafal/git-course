@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
+import pl.edukacyjni.pair.Pair;
 
 import java.util.Arrays;
 import java.util.List;
@@ -29,8 +30,8 @@ public class UserControllerTest {
     public void testGetAllUsers() throws Exception {
         // arrange
         List<User> userList = Arrays.asList(
-                new User(1L, "user1", "example"),
-                new User(2L, "user2", "use2om")
+                new User(1L, "user1", "example", new Pair("a@gmail.com")),
+                new User(2L, "user2", "use2om", new Pair("b@gmail.com", "c@gmail.com"))
         );
         when(userService.getAllUsers()).thenReturn(userList);
 
@@ -40,6 +41,8 @@ public class UserControllerTest {
                 .andExpect(jsonPath("$").isArray())
                 .andExpect(jsonPath("$[0].id").value(1))
                 .andExpect(jsonPath("$[0].username").value("user1"))
-                .andExpect(jsonPath("$[1].username").value("user2"));
+                .andExpect(jsonPath("$[1].username").value("user2"))
+                .andExpect(jsonPath("$[0].emails.primaryEmail").value("a@gmail.com"))
+                .andExpect(jsonPath("$[1].emails.secondaryEmail").value("c@gmail.com"));
     }
 }
