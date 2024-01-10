@@ -20,4 +20,11 @@ public class UserService {
     public List<User> getAllUsers() {
         return USERS;
     }
+
+    public User getUserById(long id) {
+        return USERS
+                .stream()
+                .filter(user -> id == user.getId())
+                .findFirst().orElse(null);
+    }
 }
