@@ -38,3 +38,6 @@ some require you to perform some action (e.g write some code & commit). Learn st
    3. Make a Pull Request
    4. Apply changes
    5. Enjoy!
+
+
+Some changes
