@@ -42,4 +42,26 @@ public class UserControllerTest {
                 .andExpect(jsonPath("$[0].username").value("user1"))
                 .andExpect(jsonPath("$[1].username").value("user2"));
     }
+
+    @Test
+    public void testGetUserById() throws Exception {
+        long userId = 1L;
+        User user = new User(userId, "testUser", "example");
+
+        when(userService.getUserById(userId)).thenReturn(user);
+
+        mockMvc.perform(get(BASE_ENDPOINT + "/" + userId))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(userId))
+                .andExpect(jsonPath("$.username").value("testUser"));
+    }
+
+    @Test
+    public void testGetUserById_UserNotFound() throws Exception {
+        long nonExistingUserId = 100L;
+        when(userService.getUserById(nonExistingUserId)).thenReturn(null);
+
+        mockMvc.perform(get(BASE_ENDPOINT + "/" + nonExistingUserId))
+                .andExpect(status().isNotFound());
+    }
 }
