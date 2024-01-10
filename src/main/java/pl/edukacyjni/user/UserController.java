@@ -21,12 +21,12 @@ public class UserController {
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-     public UserDTO getUserById(@PathVariable Long id) {
+    public UserDTO getUserById(@PathVariable Long id) {
         UserDTO result = userService.getUserById(id);
-        if(result != null)
-            return  result;
+        if (result != null)
+            return result;
         else
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Resource not found for this id: "+id);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Resource not found for this id: " + id);
 
     }
 

@@ -29,16 +29,16 @@ public class UserControllerTest {
     @Test
     public void testGetAllUsers() throws Exception {
         // arrange
-        UserDTO user1=new UserDTO();
+        UserDTO user1 = new UserDTO();
         user1.setId(1);
         user1.setUsername("user1");
 
-        UserDTO user2=new UserDTO();
+        UserDTO user2 = new UserDTO();
         user2.setId(2);
         user2.setUsername("user2");
 
         List<UserDTO> userList = Arrays.asList(
-                user1,user2
+                user1, user2
         );
 
         when(userService.getAllUsers()).thenReturn(userList);
@@ -55,10 +55,9 @@ public class UserControllerTest {
     @Test
     public void testGetUserByIdExist() throws Exception {
         // arrange
-        UserDTO user1=new UserDTO();
+        UserDTO user1 = new UserDTO();
         user1.setId(1);
         user1.setUsername("user1");
-
 
 
         when(userService.getUserById(1)).thenReturn(user1);
@@ -74,8 +73,6 @@ public class UserControllerTest {
     @Test
     public void testGetUserByIdNonExist() throws Exception {
         // arrange
-
-
         when(userService.getUserById(2)).thenReturn(null);
 
         // act + assert
