@@ -17,7 +17,30 @@ public class UserService {
         add(new User(5L, "was-far", "abcd"));
     }};
 
-    public List<User> getAllUsers() {
-        return USERS;
+    private UserDTO convertUserToUserDTO(User user)
+    {
+        UserDTO userDTO=new UserDTO();
+        userDTO.setId(user.getId());
+        userDTO.setUsername(user.getUsername());
+        return userDTO;
+    }
+
+    public List<UserDTO> getAllUsers() {
+        ArrayList<UserDTO> USERSDTO=new ArrayList<UserDTO>();
+
+        for(User user:USERS)
+            USERSDTO.add(convertUserToUserDTO(user));
+
+        return USERSDTO;
+    }
+
+    public UserDTO getUserById(long id)
+    {
+        for(User user:USERS)
+            if(user.getId()==id)
+                return convertUserToUserDTO(user);
+
+        return null;
+
     }
 }
