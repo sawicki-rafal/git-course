@@ -1,6 +1,6 @@
 # User Information API
 
-This is a simple Java and Spring-based REST API application for managing user information. Currently, the application provides a single endpoint for retrieving a list of users.
+This is a simple Java and Spring-based REST API application for managing user information. Currently, the application provides endpoints for retrieving a list of users and specified by id user.
 
 ## Getting Started
 
@@ -19,7 +19,10 @@ mvn spring-boot:run
 
 #### Get All Users
 * Endpoint: GET /api/users
-* Description: Retrieves a list of all users.
+* Description: Retrieves a list of all users' information specified by DTO pattern (currently id and username).
+#### Get User By ID
+* Endpoint: GET /api/users/{id}
+* Description: Retrieves information specified by DTO pattern (currently id and username) about user with given id.
 ##### Example Usage
 Use tools like Postman or curl to make a GET request (you can also use your browser):
 ```bash
