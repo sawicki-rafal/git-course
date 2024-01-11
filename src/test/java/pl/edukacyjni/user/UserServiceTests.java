@@ -17,7 +17,7 @@ public class UserServiceTests {
     public void checkEmailValidity_ShouldReturnTrue_WhenValidEmailAddressGiven() {
         assertTrue(userService.checkEmailValidity(new Pair(
                 "valid.email@gmail.com"
-                , "alsovalidEmAil@o2.pl")));
+                , "123456@student.pwr.edu.pl")));
     }
     @Test
     public void checkEmailValidity_ShouldReturnFalse_WhenInvalidEmailAddressGiven() {

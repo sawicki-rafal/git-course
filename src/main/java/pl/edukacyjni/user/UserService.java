@@ -32,7 +32,7 @@ public class UserService {
     public boolean checkEmailValidity(Pair emails) {
         for (String email : new String[]{emails.getPrimaryEmail(), emails.getSecondaryEmail()}) {
             if (email != null) {
-                Matcher m = Pattern.compile("^(?!\\.)[a-zA-Z0-9.]+@[a-zA-Z0-9]+\\.[a-zA-Z]{2,}$")
+                Matcher m = Pattern.compile("^(?!\\.)[a-zA-Z0-9.]+@[a-zA-Z0-9.]+\\.[a-zA-Z]{2,}$")
                         .matcher(email);
                 String s = null;
                 while (m.find()) {
