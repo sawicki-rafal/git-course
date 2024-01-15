@@ -27,9 +27,8 @@ public class UserController {
     }
 
     @PutMapping("/{id}/deactivate")
-    public User deactivateUserById(@PathVariable Long id) {
-        Optional<User> user = userService.deactivateUserById(id);
-        return user.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found for id: " + id));
+    public void deactivateUserById(@PathVariable Long id) throws ResponseStatusException {
+        userService.deactivateUserById(id);
     }
 
 }

@@ -1,7 +1,9 @@
 package pl.edukacyjni.user;
 
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,15 +33,14 @@ public class UserService {
         return Optional.empty();
     }
 
-    public Optional<User> deactivateUserById(Long id) {
+    public void deactivateUserById(Long id) throws ResponseStatusException {
         Optional<User> userOptional = getUserById(id);
-        if (userOptional.isPresent() && userOptional.get().getIsActive()) {
+        if (userOptional.isPresent()) {
             User user = userOptional.get();
             user.setIsActive(false);
-            return Optional.of(user);
         }
         else {
-            return userOptional;
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found at id: " + id);
         }
     }
 }
