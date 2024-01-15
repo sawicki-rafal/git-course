@@ -8,6 +8,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -59,7 +60,7 @@ public class UserControllerTest {
     @Test
     public void testGetUserById_UserNotFound() throws Exception {
         long nonExistingUserId = 100L;
-        when(userService.getUserById(nonExistingUserId)).thenReturn(null);
+        when(userService.getUserById(nonExistingUserId)).thenThrow(new NoSuchElementException("User not found with id: " + nonExistingUserId));
 
         mockMvc.perform(get(BASE_ENDPOINT + "/" + nonExistingUserId))
                 .andExpect(status().isNotFound());

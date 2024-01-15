@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class UserService {
@@ -25,6 +26,6 @@ public class UserService {
         return USERS
                 .stream()
                 .filter(user -> id == user.getId())
-                .findFirst().orElse(null);
+                .findFirst().orElseThrow(() -> new NoSuchElementException("User not found with id: " + id));
     }
 }
