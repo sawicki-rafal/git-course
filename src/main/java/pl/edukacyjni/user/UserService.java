@@ -1,6 +1,7 @@
 package pl.edukacyjni.user;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -17,28 +18,25 @@ public class UserService {
         add(new User(5L, "was-far", "abcd"));
     }};
 
-    private UserDTO convertUserToUserDTO(User user) {
-        UserDTO userDTO = new UserDTO();
-
-        userDTO.setId(user.getId());
-        userDTO.setUsername(user.getUsername());
-
-        return userDTO;
-    }
+    @Autowired
+    private UserMapper userMapper;
 
     public List<UserDTO> getAllUsers() {
         ArrayList<UserDTO> USERSDTO = new ArrayList<UserDTO>();
 
-        for (User user : USERS)
-            USERSDTO.add(convertUserToUserDTO(user));
+        for (User user : USERS) {
+            USERSDTO.add(userMapper.mapToDTO(user));
+        }
 
         return USERSDTO;
     }
 
     public UserDTO getUserById(long id) {
-        for (User user : USERS)
-            if (user.getId() == id)
-                return convertUserToUserDTO(user);
+        for (User user : USERS) {
+            if (user.getId() == id) {
+                return userMapper.mapToDTO(user);
+            }
+        }
 
         return null;
 

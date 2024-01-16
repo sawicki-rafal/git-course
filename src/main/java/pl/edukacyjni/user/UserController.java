@@ -23,10 +23,12 @@ public class UserController {
     @ResponseStatus(HttpStatus.OK)
     public UserDTO getUserById(@PathVariable Long id) {
         UserDTO result = userService.getUserById(id);
-        if (result != null)
+
+        if (result != null) {
             return result;
-        else
+        } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Resource not found for this id: " + id);
+        }
 
     }
 
