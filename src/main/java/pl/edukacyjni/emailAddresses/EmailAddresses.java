@@ -1,15 +1,15 @@
-package pl.edukacyjni.pair;
+package pl.edukacyjni.emailAddresses;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public class Pair {
+public class EmailAddresses {
     private String primaryEmail;
     private String secondaryEmail;
 
-    public Pair(String primaryEmail){
+    public EmailAddresses(String primaryEmail){
         this.primaryEmail = primaryEmail;
         this.secondaryEmail = null;
     }

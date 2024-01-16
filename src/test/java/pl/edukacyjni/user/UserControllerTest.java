@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
-import pl.edukacyjni.pair.Pair;
+import pl.edukacyjni.emailAddresses.EmailAddresses;
 
 import java.util.Arrays;
 import java.util.List;
@@ -30,8 +30,8 @@ public class UserControllerTest {
     public void testGetAllUsers() throws Exception {
         // arrange
         List<User> userList = Arrays.asList(
-                new User(1L, "user1", "example", new Pair("a@gmail.com")),
-                new User(2L, "user2", "use2om", new Pair("b@gmail.com", "c@gmail.com"))
+                new User(1L, "user1", "example", new EmailAddresses("a@gmail.com")),
+                new User(2L, "user2", "use2om", new EmailAddresses("b@gmail.com", "c@gmail.com"))
         );
         when(userService.getAllUsers()).thenReturn(userList);
 
