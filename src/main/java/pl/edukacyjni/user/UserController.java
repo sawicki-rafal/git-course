@@ -1,12 +1,11 @@
 package pl.edukacyjni.user;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @RestController
@@ -20,10 +19,9 @@ public class UserController {
         return userService.getAllUsers();
     }
 
-    @GetMapping("/{id}")
-    public User getUserById(@PathVariable Long id) {
-        Optional<User> user = userService.getUserById(id);
-        return user.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found for id: " + id));
+    @GetMapping("{userId}")
+    public User getUserById(@PathVariable long userId) {
+        return userService.getUserById(userId);
     }
 
     @PutMapping("/{id}/deactivate")

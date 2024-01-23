@@ -8,6 +8,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -41,5 +42,27 @@ public class UserControllerTest {
                 .andExpect(jsonPath("$[0].id").value(1))
                 .andExpect(jsonPath("$[0].username").value("user1"))
                 .andExpect(jsonPath("$[1].username").value("user2"));
+    }
+
+    @Test
+    public void testGetUserById() throws Exception {
+        long userId = 1L;
+        User user = new User(userId, "testUser", "example");
+
+        when(userService.getUserById(userId)).thenReturn(user);
+
+        mockMvc.perform(get(BASE_ENDPOINT + "/" + userId))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(userId))
+                .andExpect(jsonPath("$.username").value("testUser"));
+    }
+
+    @Test
+    public void testGetUserById_UserNotFound() throws Exception {
+        long nonExistingUserId = 100L;
+        when(userService.getUserById(nonExistingUserId)).thenThrow(new NoSuchElementException("User not found with id: " + nonExistingUserId));
+
+        mockMvc.perform(get(BASE_ENDPOINT + "/" + nonExistingUserId))
+                .andExpect(status().isNotFound());
     }
 }
