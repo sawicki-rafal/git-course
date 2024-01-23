@@ -18,7 +18,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class UserControllerTest {
 
     private static final String BASE_ENDPOINT = "/api/users";
-
+    private static final String GET_ENDPOINT_1 = "/api/users/1";
+    private static final String GET_ENDPOINT_2 = "/api/users/2";
     @MockBean
     private UserService userService;
 
@@ -28,10 +29,18 @@ public class UserControllerTest {
     @Test
     public void testGetAllUsers() throws Exception {
         // arrange
-        List<User> userList = Arrays.asList(
-                new User(1L, "user1", "example"),
-                new User(2L, "user2", "use2om")
+        UserDTO user1 = new UserDTO();
+        user1.setId(1);
+        user1.setUsername("user1");
+
+        UserDTO user2 = new UserDTO();
+        user2.setId(2);
+        user2.setUsername("user2");
+
+        List<UserDTO> userList = Arrays.asList(
+                user1, user2
         );
+
         when(userService.getAllUsers()).thenReturn(userList);
 
         // act + assert
@@ -41,5 +50,34 @@ public class UserControllerTest {
                 .andExpect(jsonPath("$[0].id").value(1))
                 .andExpect(jsonPath("$[0].username").value("user1"))
                 .andExpect(jsonPath("$[1].username").value("user2"));
+    }
+
+    @Test
+    public void testGetUserByIdExist() throws Exception {
+        // arrange
+        UserDTO user1 = new UserDTO();
+        user1.setId(1);
+        user1.setUsername("user1");
+
+
+        when(userService.getUserById(1)).thenReturn(user1);
+
+        // act + assert
+        mockMvc.perform(get(GET_ENDPOINT_1))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$").exists())
+                .andExpect(jsonPath("$.id").value(1))
+                .andExpect(jsonPath("$.username").value("user1"));
+    }
+
+    @Test
+    public void testGetUserByIdNonExist() throws Exception {
+        // arrange
+        when(userService.getUserById(2)).thenReturn(null);
+
+        // act + assert
+        mockMvc.perform(get(GET_ENDPOINT_2))
+                .andExpect(status().isNotFound());
+
     }
 }
