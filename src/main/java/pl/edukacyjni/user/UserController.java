@@ -1,10 +1,9 @@
 package pl.edukacyjni.user;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -24,4 +23,10 @@ public class UserController {
     public User getUserById(@PathVariable long userId) {
         return userService.getUserById(userId);
     }
+
+    @PutMapping("/{id}/deactivate")
+    public void deactivateUserById(@PathVariable Long id) throws ResponseStatusException {
+        userService.deactivateUserById(id);
+    }
+
 }

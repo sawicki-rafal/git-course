@@ -30,8 +30,8 @@ public class UserControllerTest {
     public void testGetAllUsers() throws Exception {
         // arrange
         List<User> userList = Arrays.asList(
-                new User(1L, "user1", "example"),
-                new User(2L, "user2", "use2om")
+                new User(1L, "user1", "example", false),
+                new User(2L, "user2", "use2om", false)
         );
         when(userService.getAllUsers()).thenReturn(userList);
 
